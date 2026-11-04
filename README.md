@@ -1,6 +1,6 @@
 # Portal Resmi PRM Bangunjiwo Barat
 > **Meninggikan Akhlak, Membumikan Dakwah, Membangun Ekonomi Umat**  
-> Cabang & Ranting Berdaya Nasional — LPCR-PM Pimpinan Pusat Muhammadiyah
+> Cabang & Ranting Berdaya Nasional - LPCR-PM Pimpinan Pusat Muhammadiyah
 
 Portal web modern, interaktif, dan terstruktur penuh untuk **Pimpinan Ranting Muhammadiyah (PRM) Bangunjiwo Barat**, PCM Kasihan, PDM Bantul, D.I. Yogyakarta. Dibangun dengan pendekatan **Clean Code, Semantic HTML5, DRY Architecture, dan Performa Ekstrem (0 Initial iFrames)** sebagai pembaruan komprehensif atas Google Sites terdahulu (83 halaman & sub-halaman).
 

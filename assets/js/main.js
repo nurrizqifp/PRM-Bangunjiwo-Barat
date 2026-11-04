@@ -12,7 +12,8 @@ import {
   renderLeadershipDirectory,
   renderSchoolsDirectory,
   renderProkerTimeline,
-  renderYouTubeLite
+  renderYouTubeLite,
+  initImageLightbox
 } from './core/page-renderer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -60,5 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const title = el.dataset.videoTitle || 'Video PRM Bangunjiwo Barat';
     renderYouTubeLite(el, videoId, title);
   });
+
+  // 5. Initialize Interactive Image Lightbox
+  initImageLightbox();
 });
 
