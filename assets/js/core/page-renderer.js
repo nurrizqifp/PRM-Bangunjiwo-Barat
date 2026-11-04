@@ -128,7 +128,7 @@ export function renderFinancialDashboard(containerEl) {
   const finalBalance = f.summary ? f.summary.finalBalance : 0;
 
   containerEl.innerHTML = `
-    <div class="finance-summary-grid">
+    <div class="finance-stats-grid">
       <div class="finance-stat-card">
         <span class="finance-stat-label">Total Pemasukan (${escapeHTML(f.period || '2023-2026')})</span>
         <span class="finance-stat-val" style="color: var(--color-primary-700);">${formatRupiah(totalIncome)}</span>
@@ -620,6 +620,7 @@ export function renderLeadershipDirectory(containerEl) {
   const resetVcBtn = containerEl.querySelector('#btn-reset-vc-filter');
   const secCards = containerEl.querySelectorAll('.prm-section-card');
   const secCountBadge = containerEl.querySelector('#prm-sections-count');
+  const sectionsHeading = containerEl.querySelector('#prm-sections-heading');
 
   const applyVcFilter = (vcKey) => {
     const allowedIndices = vcSectionMapping[vcKey] || vcSectionMapping['all'];
@@ -656,6 +657,7 @@ export function renderLeadershipDirectory(containerEl) {
         if (resetVcBtn) resetVcBtn.classList.remove('is-active');
         applyVcFilter(vcIdx);
       }
+      if (sectionsHeading) sectionsHeading.scrollIntoView({ block: 'start' });
     });
   });
 
