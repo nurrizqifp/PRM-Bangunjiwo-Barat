@@ -556,20 +556,176 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 0.85rem;
-  background-color: var(--color-primary-50);
-  color: var(--color-primary-700);
-  border: 1px solid rgba(0, 71, 62, 0.15);
+  padding: 0.45rem 1rem;
+  background: linear-gradient(135deg, rgba(0, 71, 62, 0.08), rgba(243, 168, 26, 0.12));
+  color: var(--color-primary-800);
+  border: 1px solid rgba(0, 71, 62, 0.2);
   border-radius: var(--radius-full);
   font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 71, 62, 0.06);
 }
 
 [data-theme="dark"] .hero-tag {
-  background-color: var(--color-surface-muted);
+  background: linear-gradient(135deg, rgba(27, 122, 104, 0.25), rgba(243, 168, 26, 0.15));
   color: var(--color-primary-100);
+  border-color: rgba(243, 168, 26, 0.3);
+}
+
+.hero-tag-pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent-600);
+  box-shadow: 0 0 0 0 rgba(243, 168, 26, 0.7);
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(243, 168, 26, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(243, 168, 26, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(243, 168, 26, 0);
+  }
+}
+
+/* Rolling Character Counter Banner */
+.hero-rolling-banner {
+  background: linear-gradient(135deg, var(--color-surface-card), rgba(0, 71, 62, 0.04));
+  border: 1px solid rgba(0, 71, 62, 0.18);
+  border-left: 4px solid var(--color-primary-600);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  margin-block: 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  box-shadow: 0 4px 16px rgba(0, 71, 62, 0.05);
+}
+
+[data-theme="dark"] .hero-rolling-banner {
+  background: linear-gradient(135deg, var(--color-surface-card), rgba(27, 122, 104, 0.1));
+  border-color: rgba(27, 122, 104, 0.35);
+  border-left-color: var(--color-accent-500);
+}
+
+.hero-rolling-info {
+  flex: 1;
+}
+
+.hero-rolling-caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-700);
+  margin-bottom: 0.25rem;
+}
+
+[data-theme="dark"] .hero-rolling-caption {
+  color: var(--color-accent-400);
+}
+
+.hero-rolling-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.hero-rolling-title small {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-top: 0.15rem;
+}
+
+/* Rolling Counter Digits Container */
+.rolling-counter {
+  display: inline-flex;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.rolling-digit-box {
+  position: relative;
+  width: 1.85rem;
+  height: 2.6rem;
+  background-color: var(--color-primary-700);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  margin-inline: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 71, 62, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .rolling-digit-box {
+  background-color: var(--color-primary-600);
+  border-color: rgba(243, 168, 26, 0.3);
+}
+
+.rolling-digit-strip {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.rolling-char {
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.65rem;
+  font-weight: 800;
+  font-family: inherit;
+  user-select: none;
+}
+
+.rolling-suffix {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-accent-600);
+  margin-left: 4px;
+  align-self: center;
+}
+
+@media (max-width: 640px) {
+  .hero-rolling-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+  .rolling-digit-box {
+    width: 1.65rem;
+    height: 2.35rem;
+  }
+  .rolling-char {
+    height: 2.35rem;
+    font-size: 1.45rem;
+  }
 }
 
 .hero-title {

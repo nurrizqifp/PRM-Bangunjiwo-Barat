@@ -890,3 +890,86 @@ export function initImageLightbox() {
     if (e.key === 'ArrowLeft') showAt(currentIndex - 1);
   });
 }
+
+/**
+ * Initialize Rolling Character Counter for Odometer / Slot Machine Roll Effect
+ * Animates numbers in .rolling-counter container when visible in viewport
+ */
+export function initRollingCounters() {
+  const counterEls = document.querySelectorAll('.rolling-counter[data-target]');
+  if (counterEls.length === 0) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  counterEls.forEach(el => observer.observe(el));
+}
+
+function animateCounter(el) {
+  const targetStr = String(el.dataset.target || '').trim();
+  const suffix = el.dataset.suffix || '';
+  if (!targetStr) return;
+
+  // Build rolling columns
+  el.innerHTML = '';
+  const digits = targetStr.split('');
+  const strips = [];
+
+  digits.forEach((char, idx) => {
+    const isNum = /\d/.test(char);
+    const box = document.createElement('span');
+    box.className = 'rolling-digit-box';
+    box.setAttribute('aria-hidden', 'true');
+
+    const strip = document.createElement('span');
+    strip.className = 'rolling-digit-strip';
+
+    if (isNum) {
+      // 0 through 9
+      for (let i = 0; i <= 9; i++) {
+        const item = document.createElement('span');
+        item.className = 'rolling-char';
+        item.textContent = String(i);
+        strip.appendChild(item);
+      }
+    } else {
+      const item = document.createElement('span');
+      item.className = 'rolling-char';
+      item.textContent = char;
+      strip.appendChild(item);
+    }
+
+    box.appendChild(strip);
+    el.appendChild(box);
+    strips.push({ strip, targetDigit: isNum ? parseInt(char, 10) : 0, isNum, delay: idx * 120 });
+  });
+
+  if (suffix) {
+    const sufEl = document.createElement('span');
+    sufEl.className = 'rolling-suffix';
+    sufEl.textContent = suffix;
+    el.appendChild(sufEl);
+  }
+
+  // Set accessible label on parent
+  el.setAttribute('aria-label', `${targetStr}${suffix}`);
+
+  // Trigger rolling animation after microtask
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      strips.forEach(({ strip, targetDigit, isNum, delay }) => {
+        if (!isNum) return;
+        setTimeout(() => {
+          const charHeight = strip.querySelector('.rolling-char')?.getBoundingClientRect().height || 41.6;
+          strip.style.transform = `translateY(-${targetDigit * charHeight}px)`;
+        }, delay);
+      });
+    }, 200);
+  });
+}

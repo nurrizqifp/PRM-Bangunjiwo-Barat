@@ -13,7 +13,8 @@ import {
   renderSchoolsDirectory,
   renderProkerTimeline,
   renderYouTubeLite,
-  initImageLightbox
+  initImageLightbox,
+  initRollingCounters
 } from './core/page-renderer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -64,5 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 5. Initialize Interactive Image Lightbox
   initImageLightbox();
+
+  // 6. Initialize Rolling Character Counters (AMM & Pengajian)
+  initRollingCounters();
 });
 
